@@ -1,9 +1,11 @@
 // setTimeout setInterval
 
 let timerId;
-let i = 0, n = 0;
 
-const btn = document.querySelector('.btn');
+
+const btn = document.querySelectorAll('.btn')[0];
+const stop = document.querySelectorAll('.btn')[1];
+const ball = document.querySelectorAll('.btn')[2];
 const box = document.querySelector('.box');
 const wrapper = document.querySelector('.wrapper');
 
@@ -11,75 +13,85 @@ const wrapper = document.querySelector('.wrapper');
 let wrapperWidth = 0;
 let wrapperHeight = 0;
 
-const animation = () => {
+let afterW = -1;
+let afterH = -1;
 
-    const moveWidth = (gap) => {
-        wrapperWidth += gap;
-        box.style.left = wrapperWidth + 'px';
-    }
+const game = function (speed, placeWidth, placeHeight, boxWidth, boxHeight = boxWidth) {
 
-    const moveHeight = (gap) => {
-        wrapperHeight += gap;
-        box.style.top = wrapperHeight + 'px';
-    }
+    ball.addEventListener('click', () => {
+        boxHeight = boxWidth;
+        box.style.width = `${boxWidth}px`;
+        box.style.height = `${boxHeight}px`;
+        box.style.borderRadius = '50%';
+    });
 
-    const id = setInterval(frame, 10);
+    wrapper.style.width = `${placeWidth}px`;
+    wrapper.style.height = `${placeHeight}px`;
 
-    function frame() {
-        if (wrapperHeight === 0) {
-            moveHeight(10)
-        } else if (wrapperHeight === 0) {
-            moveHeight(-10)
-        };
+    box.style.width = `${boxWidth}px`;
+    box.style.height = `${boxHeight}px`;
 
-        if (wrapperWidth === 1200) {
-            moveWidth(10)
-        } else if (wrapperWidth === 0) {
-            moveWidth(-10)
+    const animation = () => {
+
+        const moveWidth = (gap) => {
+            afterW = wrapperWidth;
+            wrapperWidth += gap;
+            box.style.left = wrapperWidth + 'px';
         }
-    }
-};
 
-let width = 100;
-let height = 100;
+        const moveHeight = (gap) => {
+            afterH = wrapperHeight;
+            wrapperHeight += gap;
+            box.style.top = wrapperHeight + 'px';
+        }
 
-btn.addEventListener('click', animation);
+        const id = setInterval(frame, speed);
 
-box.addEventListener('click', (event) => {
-    if (event.target.classList.contains('box')) {
-        console.log(`strike ${i++}`);
-        width -= 10;
-        height -= 10;
-        box.style.width = width + 'px';
-        box.style.height = height + 'px';
-    }
-
-});
-
-wrapper.addEventListener('click', (event) => {
-    if (event.target.classList.contains('wrapper')) {
-        console.log(`loss ${n++}`);
-        width += 10;
-        height += 10;
-        box.style.width = width + 'px';
-        box.style.height = height + 'px';
-    }
-});
+        function frame() {
+            if (wrapperWidth >= 0 && wrapperWidth > afterW && wrapperWidth < placeWidth - boxWidth) {
+                moveWidth(10)
+            } else if (wrapperWidth !== 0) {
+                moveWidth(-10)
+            } else { wrapperWidth = 0; afterW = -1; }
 
 
+            if (wrapperHeight >= 0 && wrapperHeight > afterH && wrapperHeight < placeHeight - boxHeight) {
+                moveHeight(10)
+            } else if (wrapperHeight !== 0) {
+                moveHeight(-10)
+            } else { wrapperHeight = 0; afterH = -1; }
 
+        }
 
+        stop.addEventListener('click', () => {
+            clearInterval(id);
+        });
+    };
 
-// btn.addEventListener('click', () => {
-//     timerId = setInterval(logger, 100);
-// });
+    btn.addEventListener('click', animation);
 
+    let i = 1, n = 1;
+    box.addEventListener('click', (event) => {
+        if (event.target.classList.contains('box')) {
+            console.log(event.target.classList.contains('box'));
+            console.log(`strike ${i++}`);
+            boxWidth -= 10;
+            boxHeight -= 10;
+            box.style.width = boxWidth + 'px';
+            box.style.height = boxHeight + 'px';
+        }
+    });
 
-// function logger() {
-//     if (i === 3) {
-//         clearInterval(timerId);
-//     }
-//     console.log('logger');
-//     i++;
-// };
+    wrapper.addEventListener('click', (event) => {
+        if (event.target.classList.contains('wrapper')) {
+            console.log(event.target.classList.contains('wrapper'));
+            console.log(`loss ${n++}`);
+            boxWidth += 10;
+            boxHeight += 10;
+            box.style.width = boxWidth + 'px';
+            box.style.height = boxHeight + 'px';
+        }
+    });
+}
 
+game(100, 1200, 400, 100);
