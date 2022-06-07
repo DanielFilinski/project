@@ -1,3 +1,6 @@
+.nav{
+  display: flex;
+}
 .box {
   position: absolute;
   
@@ -11,11 +14,34 @@
   height: 600px;
   border: 3px solid red;
 }
-button {
-  margin-bottom: 10px;
-  margin-top: 10px;
+
+.btn{
+  margin: 10px;  
   width: 100px;
   height: 40px;
   background-color: yellow;
   border: none;
+}
+
+.parametrs{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.parametrs button{
+  width: 30px;
+  height: 30px;
+}
+
+.parametrs input{
+  width: 30px;
+  height: 25px;
+}
+
+.name{
+  margin: 0;
+  font-size: 20px;
+  align-items: center;
+  padding-left: 30px;
 }

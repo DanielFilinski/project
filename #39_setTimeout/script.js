@@ -122,7 +122,7 @@ const game = function (speed, placeWidth, boxWidth, boxHeight = boxWidth) {
         });
     };
 
-    btn.addEventListener('click', animation);
+    animation();
 
     let i = 1, n = 1;
     box.addEventListener('click', (event) => {
