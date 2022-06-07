@@ -9,14 +9,55 @@ const ball = document.querySelectorAll('.btn')[2];
 const box = document.querySelector('.box');
 const wrapper = document.querySelector('.wrapper');
 
-
 let wrapperWidth = 0;
 let wrapperHeight = 0;
 
 let afterW = -1;
 let afterH = -1;
 
-const game = function (speed, placeWidth, placeHeight, boxWidth, boxHeight = boxWidth) {
+let speedEl = 0;
+inputSpeed.value = speedEl
+let placeEl = 800;
+inputPlace.value = placeEl
+let boxEl = 100;
+inputBox.value = boxEl;
+let boxElH = boxEl;
+
+let id;
+
+plusSpeed.addEventListener('click', () => {
+    speedEl += 10;
+    inputSpeed.value = speedEl;
+});
+
+minusSpeed.addEventListener('click', () => {
+    speedEl -= 10;
+    inputSpeed.value = speedEl;
+});
+
+plusPlace.addEventListener('click', () => {
+    placeEl += 100;
+    inputPlace.value = placeEl;
+});
+
+minusPlace.addEventListener('click', () => {
+    placeEl -= 100;
+    inputPlace.value = placeEl;
+});
+
+plusBox.addEventListener('click', () => {
+    boxEl += 10;
+    inputBox.value = boxEl;
+});
+
+minusBox.addEventListener('click', () => {
+    boxEl -= 10;
+    inputBox.value = boxEl;
+});
+
+const game = function (speed, placeWidth, boxWidth, boxHeight = boxWidth) {
+
+    placeHeight = placeWidth / 2;
 
     ball.addEventListener('click', () => {
         boxHeight = boxWidth;
@@ -30,6 +71,8 @@ const game = function (speed, placeWidth, placeHeight, boxWidth, boxHeight = box
 
     box.style.width = `${boxWidth}px`;
     box.style.height = `${boxHeight}px`;
+
+
 
     const animation = () => {
 
