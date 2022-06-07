@@ -1,13 +1,24 @@
 // setTimeout setInterval
 
-let timerId;
-
-
-const btn = document.querySelectorAll('.btn')[0];
-const stop = document.querySelectorAll('.btn')[1];
-const ball = document.querySelectorAll('.btn')[2];
+const stop = document.querySelectorAll('.btn')[0];
+const ball = document.querySelectorAll('.btn')[1];
 const box = document.querySelector('.box');
 const wrapper = document.querySelector('.wrapper');
+
+const go = document.querySelector('.btn-go');
+
+const plusSpeed = document.querySelector('.btn-plus-speed');
+const inputSpeed = document.querySelector('.input-value-speed');
+const minusSpeed = document.querySelector('.btn-minus-speed');
+
+const plusPlace = document.querySelector('.btn-plus-place');
+const inputPlace = document.querySelector('.input-value-place');
+const minusPlace = document.querySelector('.btn-minus-place');
+
+const plusBox = document.querySelector('.btn-plus-box');
+const inputBox = document.querySelector('.input-value-box');
+const minusBox = document.querySelector('.btn-minus-box');
+
 
 let wrapperWidth = 0;
 let wrapperHeight = 0;
