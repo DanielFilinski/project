@@ -26,7 +26,7 @@ let wrapperHeight = 0;
 let afterW = -1;
 let afterH = -1;
 
-let speedEl = 0;
+let speedEl = 40;
 inputSpeed.value = speedEl
 let placeEl = 800;
 inputPlace.value = placeEl
@@ -99,7 +99,7 @@ const game = function (speed, placeWidth, boxWidth, boxHeight = boxWidth) {
             box.style.top = wrapperHeight + 'px';
         }
 
-        const id = setInterval(frame, speed);
+        id = setInterval(frame, speed);
 
         function frame() {
             if (wrapperWidth >= 0 && wrapperWidth > afterW && wrapperWidth < placeWidth - boxWidth) {
@@ -122,7 +122,8 @@ const game = function (speed, placeWidth, boxWidth, boxHeight = boxWidth) {
         });
     };
 
-    animation();
+    animation()
+    // btn.addEventListener('click', animation);
 
     let i = 1, n = 1;
     box.addEventListener('click', (event) => {
@@ -148,4 +149,7 @@ const game = function (speed, placeWidth, boxWidth, boxHeight = boxWidth) {
     });
 }
 
-game(100, 1200, 400, 100);
+go.addEventListener('click', () => {
+    clearInterval(id);
+    game(speedEl, placeEl, boxEl, boxElH);
+});
