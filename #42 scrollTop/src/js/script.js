@@ -5,11 +5,15 @@ const btn = document.querySelector('button');
 const progress = document.querySelector('.progress');
 const square = document.querySelectorAll('.square');
 
-
-html.addEventListener("wheel", (e) => {
+const scrollBar = (e) => {
     progress.style.width = `${((html.scrollTop / (html.scrollHeight - html.clientHeight)) * 100) - 2}%`;
-    progress.style.transition = '.2s ease-in-out';
-});
+    // progress.style.transition = '.2s ease-in-out';
+}
+
+html.addEventListener("wheel", scrollBar);
+html.addEventListener("scroll", scrollBar);
+
+
 
 // Работа с координатами и стилями
 console.log(square[0].getBoundingClientRect())
@@ -31,8 +35,19 @@ square[0].addEventListener('mouseover', () => {
 })
 
 square[1].addEventListener('click', () => {
-    html.scrollTo(0, btn.getBoundingClientRect().top) // перемещение к кнопке где бы она не находится на странице
+    html.scrollTo(0, btn.getBoundingClientRect().bottom) // перемещение к кнопке где бы она не находится на странице
+    console.log(btn.getBoundingClientRect().bottom)
 })
+
+
+const btnScroll = document.querySelector('.btn-scroll');
+
+btnScroll.addEventListener('click', () => {
+    html.scrollTo(0, html.scrollHeight - html.clientHeight)
+})
+
+
+
 
 
 
